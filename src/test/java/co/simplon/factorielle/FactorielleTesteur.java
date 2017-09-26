@@ -69,5 +69,18 @@ public class FactorielleTesteur {
 		assertEquals("!-1 = ERREUR", true, factorielleTest (-1L, 0L));
 	} // TesterFactorielleNegatif
 
+	@Test(timeout = 1)
+	public void TesterFactorielleXxFois1MS() {
+		while (true) {
+			assertEquals("!19 = 121645100408832000", true, factorielleTest (19L, 121645100408832000L));
+		} // while
+	} // TesterFactorielleNegatif
+
+	@Test(timeout = 1)
+	public void TesterFactorielle100Fois1MS() {
+		for (int i=1; i<=100; i++) {
+			assertEquals("!19 = 121645100408832000", true, factorielleTest (19L, 121645100408832000L));
+		} // for
+	} // TesterFactorielleNegatif
 
 } // class FactorielleTesteur
