@@ -55,6 +55,11 @@ public class FactorielleTesteur {
 	} // TesterFactorielleTrois
 
 	@Test
+	public void TesterBadFactorielleTrois() {
+		assertTrue(factorielleTest (3L, 9L));
+	} // TesterBadFactorielleTrois
+
+	@Test
 	public void TesterFactorielleCinq() {
 		assertTrue(factorielleTest (5L, 120L));
 	} // TesterFactorielleCinq
