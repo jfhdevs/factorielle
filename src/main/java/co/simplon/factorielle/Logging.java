@@ -1,14 +1,17 @@
 package co.simplon.factorielle;
 
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.slf4j.*;
+
 public class Logging {
+	private static Logger logger = LoggerFactory.getLogger(Logging.class);
 	private Date dateHeureDebut;
 	private String entree;
 	private Date dateHeureFin;
 	private String resultat;
+	private String type;
 
 //	Constructeurs
 	public Logging(String entree) {
@@ -22,22 +25,25 @@ public class Logging {
 	} // Logging
 
 //	Setteurs
-	public void setResultat(String resultat) {
-		this.dateHeureFin = new Date();
-		this.resultat = resultat;
-		System.out.println(this.toString());
-	} // setResultat
 
-	public void setResultat(long resultat) {
-		this.dateHeureFin = new Date();
-		this.resultat = Long.toString(resultat);
-		System.out.println(this.toString());
-	} // setResultat
 
 //	Autres
+	public void closeLogging (String type, String resultat) {
+		this.dateHeureFin = new Date();
+		this.resultat = resultat;
+		this.type = type;
+		if (type.equals("warming")) { logger.warn(this.toString());
+		} else {				logger.debug(this.toString());			
+		} // if
+	} // closeLogging
+	
+	public void closeLogging (String type, long resultat) {
+		this.closeLogging (type, Long.toString(resultat));
+	} // closeLogging
+	
 	@Override
 	public String toString() {
-		SimpleDateFormat formater = new SimpleDateFormat("dd MMMMM yyyy, hh:mm aaa");
+		SimpleDateFormat formater = new SimpleDateFormat("dd MMMMM yyyy, hh:mm:ss.SSSS");
 		String log;
 		log = "Début " + formater.format(dateHeureDebut) + "; Valeur en entrée " + entree;
 		log += "; Fin " + formater.format(dateHeureFin) + "; Résultat de ! " + resultat;

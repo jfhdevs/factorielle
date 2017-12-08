@@ -6,13 +6,21 @@ package co.simplon.factorielle;
  */
 public class Factorielle 
 {
-    public Factorielle(long n) {
+    public Factorielle() {
     	super();
-    	long res;
-    	Logging(n);
-    	res = calculer (n);
-    	setResultat(res);
     } // Factorielle
+    
+    public long loggedFactorielle(long n) {
+    	Logging log = new Logging (n);
+    	long res;
+    	try { res = calculer (n); }
+    	catch (IllegalArgumentException e) { 
+    		log.closeLogging ("warming", "nombre Négatif");
+    		throw new IllegalArgumentException();
+    	} // try
+    	log.closeLogging ("info", res);
+    	return res;
+    } // loggedFactorielle
     
     public long calculer(long n) {
     	if (n > 1) {	return n * calculer(n-1);
